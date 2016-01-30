@@ -4,9 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import application.Controler;
 import application.GameObserver;
@@ -19,6 +21,7 @@ public class GameBoard extends JPanel implements GameObserver, MouseListener, Mo
 	
 	private Controler controler;
 	private Jeton[][] arrayJetons;
+	private Jeton tmp;
 	
 	/** Constructeur */
 	public GameBoard(Controler controler) {
@@ -33,10 +36,11 @@ public class GameBoard extends JPanel implements GameObserver, MouseListener, Mo
 				add(jeton);
 			}
 		}
+		this.tmp = new Jeton(0, 0);
+		add(tmp);
 		
 		setLayout(null);
 		setPreferredSize(new Dimension(504, 432));
-		//setBackground(Color.black);
 		
 		// Image du puissance4
 		spriteDamier = new JLabel();
@@ -61,6 +65,21 @@ public class GameBoard extends JPanel implements GameObserver, MouseListener, Mo
 	
 	@Override
 	public void updatePlateau(int line, int column, int color) {
+		tmp.setLine(0);
+		tmp.setColumn(column);
+		tmp.setIconJeton(color);
+		tmp.setVisible(true);
+		
+		for (int i = 0; i < line*8; i++) {
+			tmp.setLocation(8 + column*72, (tmp.getY() + 9));
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		tmp.setVisible(false);
 		arrayJetons[line][column].setIconJeton(color);
 	}
 	
@@ -96,7 +115,12 @@ public class GameBoard extends JPanel implements GameObserver, MouseListener, Mo
 	@Override
 	public void mouseReleased(MouseEvent ev) {
 		int column = ev.getX() / 72;
-		controler.columnClicked(column);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				controler.columnClicked(column);
+			}
+		});
 	}
 	
 	@Override

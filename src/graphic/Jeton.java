@@ -27,6 +27,18 @@ class Jeton extends JLabel {
 		return line;
 	}
 	
+	/** Modifie la ligne du jeton */
+	public void setLine(int line) {
+		this.line = line;
+		setLocation(getX(), line*72);
+	}
+	
+	/** Modifie la colonne du jeton */
+	public void setColumn(int column) {
+		this.column = column;
+		setLocation(8 + column*72, getY());
+	}
+	
 	/** Change l'apparence du jeton */
 	public void setIconJeton(int color) {
 		setIcon(null);
