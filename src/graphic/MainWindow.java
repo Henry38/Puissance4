@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import application.Controler;
+import artificial_intelligence.IA_AlphaBeta;
 import data.GameType;
+import data.Plateau;
 
 public class MainWindow extends JFrame {
 	
@@ -25,9 +27,6 @@ public class MainWindow extends JFrame {
 		panneau.setLayout(new GridBagLayout());
 		panneau.add(gameBoard);
 		setContentPane(panneau);
-		
-//		JMenuBar menu = new Menu();
-//		setJMenuBar(menu);
 		
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,8 +48,9 @@ public class MainWindow extends JFrame {
 			}
 		});
 		
-		controler.newGame(GameType.joueur_contre_ordinateur);
 		//controler.newGame(GameType.joueur_contre_joueur);
+		controler.newGame(GameType.joueur_contre_ordinateur);
+		//controler.newGame(GameType.ordinateur_contre_joueur);
 		//controler.newGame(GameType.ordinateur_contre_ordinateur);
 		
 		try {
@@ -61,5 +61,19 @@ public class MainWindow extends JFrame {
 		
 		Thread t = new Thread(controler);
 		t.start();
+		
+//		controler.jouerCoup(3);
+//		controler.jouerCoup(6);
+//		controler.jouerCoup(3);
+//		controler.jouerCoup(6);
+//		controler.jouerCoup(3);
+//		
+//		IA_AlphaBeta ia = new IA_AlphaBeta(controler.p, 2);
+//		ia.run();
+//		int coup = ia.getCoup();
+//		
+//		Plateau p = controler.p;
+//		System.out.println(p);
+//		//System.out.println(controler.p.getJoueur() + ", " + coup);
 	}
 }

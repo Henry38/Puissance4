@@ -71,10 +71,10 @@ public class IA_AlphaBeta extends Thread {
 	}
 	
 	/** Algorithme Alpha Beta MinMax */
-	public int ab_min_max(Plateau p_courant, int alpha, int beta, int depth) {
+	private int ab_min_max(Plateau p_courant, int alpha, int beta, int depth) {
 		
 		// p_courant.joueur == -1
-		if (p_courant.hasWon(-1)) {
+		if (p_courant.hasWon(1)) {
 			return Integer.MAX_VALUE;
 		} else if (depth == 0) {
 			return p_courant.evaluation();
@@ -111,10 +111,10 @@ public class IA_AlphaBeta extends Thread {
 	}
 	
 	/** Algorithme Alpha Beta MaxMin */
-	public int ab_max_min(Plateau p_courant, int alpha, int beta, int depth) {
+	private int ab_max_min(Plateau p_courant, int alpha, int beta, int depth) {
 		
 		// p_courant.joueur == 1
-		if (p_courant.hasWon(1)) {
+		if (p_courant.hasWon(-1)) {
 			return Integer.MIN_VALUE;
 		} else if (depth == 0) {
 			return p_courant.evaluation();

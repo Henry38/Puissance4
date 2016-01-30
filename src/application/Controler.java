@@ -8,7 +8,7 @@ import data.Plateau;
 
 public class Controler implements Runnable {
 	
-	private Plateau p;
+	public Plateau p;
 	private int coup;
 	private boolean endGame, cpuPhase;
 	private GameType gameType;
@@ -59,7 +59,7 @@ public class Controler implements Runnable {
 	private void searchCoup() {
 		cpuPhase = true;
 		// Calcul du meilleur coup
-		IA_AlphaBeta t = new IA_AlphaBeta(p, 1);
+		IA_AlphaBeta t = new IA_AlphaBeta(p, 4);
 		t.start();
 		try {
 			t.join();
@@ -70,7 +70,7 @@ public class Controler implements Runnable {
 	}
 	
 	/** Joue le coup passe en parametre */
-	private void jouerCoup(int coup) {
+	public void jouerCoup(int coup) {
 		int line = p.jouerCoup(coup);
 		firePlateauUpdated(line, coup, p.getColor(line, coup));
 	}

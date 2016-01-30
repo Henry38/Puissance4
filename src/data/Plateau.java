@@ -176,4 +176,17 @@ public class Plateau {
    		return chaineMax;
    	}
 	
+	
+	
+	public String toString() {
+		String str = "";
+		for (int line = 0; line < 6; line++) {
+			for (int column = 0; column < 7; column++) {
+				str += getColor(line, column) + ", ";
+			}
+			str += "\n";
+		}
+		return str;
+	}
+	
 }
